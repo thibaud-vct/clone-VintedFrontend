@@ -1,3 +1,113 @@
+/*$$$$$$$$ rules general $$$$$$$$*/
+/*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
+button,
+a {
+    cursor: pointer;
+}
+button {
+    height: 27px;
+    color: white;
+    background-color: #09b1ba;
+    border: none;
+    padding: 0px 10px;
+    border-radius: 3px;
+    margin: 5px;
+}
+.isLoading {
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-image: linear-gradient(to left, #fff, #09b1ba, #fff) 100;
+    animation: load 800ms linear infinite;
+}
+@keyframes load {
+    0% {
+        margin-left: -100%;
+    }
+    50% {
+        margin-left: 0%;
+    }
+    100% {
+        margin-left: 100%;
+    }
+}
+
+/*$$$$$$$$ rules header $$$$$$$$*/
+/*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
+header {
+    height: 50px;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+header img {
+    height: 40px;
+}
+header > form {
+    width: 25%;
+    height: 30px;
+    margin: 5px;
+}
+header > form > input {
+    width: 100%;
+    height: 30px;
+    background-color: #ebedee;
+    padding: 0px 10px;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+}
+.login {
+    color: #09b1ba;
+    background-color: white;
+    border: 1px solid #09b1ba;
+    box-sizing: border-box;
+}
+.modal {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modal a {
+    color: #09b1ba;
+}
+.modal > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 300px;
+    padding: 20px 20px 60px 20px;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 15px;
+}
+/*$$$$$$$$ rules main $$$$$$$$*/
+/*$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
+.hero {
+    display: flex;
+    align-items: center;
+    height: 450px;
+    background-image: url(./img/NORSE-PROJECTS_SPRING21_MEN.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.hero > div {
+    height: 250px;
+    width: 400px;
+    margin: 0 50px;
+    background-color: white;
+    border-radius: 3px;
+}
+
 .offers {
     display: flex;
     flex-wrap: wrap;
@@ -9,7 +119,7 @@
     height: 400px;
     width: 225px;
     margin: 20px;
-    border: 2px solid red;
+    border: 2px solid #09b1ba;
     box-sizing: border-box;
 }
 .avatar {

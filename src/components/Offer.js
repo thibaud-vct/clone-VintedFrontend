@@ -1,27 +1,29 @@
 import { Link } from "react-router-dom";
 
-const Offer = ({ data }) => {
-    // console.log("offer", data.owner.account.avatar.secure_url);
+const Offer = ({ offer }) => {
+    // console.log("offer", offer);
     const {
         _id,
         owner,
         product_name,
         product_price,
         product_description,
-        product_pictures,
-    } = data;
+        product_image,
+    } = offer;
     return (
         <div className="offer">
-            <Link to={`/product/${_id}`}>
+            <Link to={`/offer/${_id}`}>
                 <div>
-                    <img
-                        src={owner.account.avatar.url}
-                        alt="avatar"
-                        className="avatar"
-                    />
+                    {owner.account.avatar && (
+                        <img
+                            src={owner.account.avatar.url}
+                            alt="avatar"
+                            className="avatar"
+                        />
+                    )}
                     <span>{owner.account.username}</span>
                 </div>
-                <img src={product_pictures[0].url} alt="" />
+                <img src={product_image.secure_url} alt="" />
             </Link>
             <div>
                 <div>

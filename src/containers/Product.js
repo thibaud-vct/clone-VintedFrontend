@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 const Product = (props) => {
     const { id } = useParams();
     const [data, setData] = useState([]);
-    const [isValid, setIsValid] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const {
-        product_pictures,
+        product_image,
         product_name,
         product_description,
         product_details,
@@ -18,35 +18,35 @@ const Product = (props) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
+                    `https://my-first-api-vinted.herokuapp.com/offer/${id}`
                 );
                 setData(response.data);
-                setIsValid(true);
+                setIsLoading(true);
             } catch (error) {
-                alert = error.message;
+                // créer route 404
+                alert(error.message);
             }
         };
         fetchData();
-    }, []);
+    }, [id]);
 
-    console.log("Product", data);
-
-    return !isValid ? (
-        <div>en télechargement...</div>
+    return !isLoading ? (
+        <p className="isLoading" />
     ) : (
         <div className="product">
             <div>
-                {product_pictures.map((img) => {
+                <img src={product_image.secure_url} alt={product_name} />
+                {/* {product_image.map((img) => {
                     return <img src={img.url} alt={product_name} />;
-                })}
+                })} */}
             </div>
             <div>
-                <h2></h2>
+                <h2>{product_price}</h2>
                 <div>
                     {product_details.map((detail, i) => {
                         const key = Object.keys(detail);
                         return (
-                            <div>
+                            <div key={i}>
                                 <span>{key}</span>
                                 <span>{detail[key]}</span>
                             </div>
@@ -58,11 +58,14 @@ const Product = (props) => {
                     <h3>{product_name}</h3>
                     <p>{product_description}</p>
                     <div>
-                        <img
-                            src={owner.account.avatar.url}
-                            alt="avatar"
-                            className="avatar-m"
-                        />
+                        {owner.account.avatar && (
+                            <img
+                                src={owner.account.avatar.url}
+                                alt="avatar"
+                                className="avatar-m"
+                            />
+                        )}
+
                         <span>{owner.account.username}</span>
                     </div>
                 </div>
