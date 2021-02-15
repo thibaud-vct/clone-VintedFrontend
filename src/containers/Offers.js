@@ -6,7 +6,7 @@ import Offer from "../components/Offer";
 const Offers = ({ filters }) => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const params = { title: filters };
+    const params = { title: filters, sort: price - desc };
 
     useEffect(() => {
         const fetchData = async () => {
