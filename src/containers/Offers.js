@@ -17,10 +17,9 @@ const Offers = ({ filters }) => {
             //     params = params + "param2=tata";
             // }
             try {
-                const response = await axios
-                    .get
-                    // `https://my-first-api-vinted.herokuapp.com/offers?title=${searchInput}&priceMin=${priceMin}&priceMax=${priceMax}&sort=${sort}&page=${page}&limit=${limit}`
-                    ();
+                const response = await axios.get(
+                    `https://my-first-api-vinted.herokuapp.com/offers?title=${filters}`
+                );
                 setData(response.data);
                 setIsLoading(true);
             } catch (error) {
