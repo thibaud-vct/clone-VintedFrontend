@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import avatar from "../assets/img/avatar.jpg";
+import axios from "axios";
 
-const Product = (props) => {
+const Product = () => {
     const { id } = useParams();
-    const [data, setData] = useState([]);
+    const [data, setData] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const {
         product_image,
@@ -14,6 +15,7 @@ const Product = (props) => {
         product_price,
         owner,
     } = data;
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -36,9 +38,6 @@ const Product = (props) => {
         <div className="product">
             <div>
                 <img src={product_image.secure_url} alt={product_name} />
-                {/* {product_image.map((img) => {
-                    return <img src={img.url} alt={product_name} />;
-                })} */}
             </div>
             <div>
                 <h2>{product_price}</h2>
@@ -47,8 +46,8 @@ const Product = (props) => {
                         const key = Object.keys(detail);
                         return (
                             <div key={i}>
-                                <span>{key}</span>
-                                <span>{detail[key]}</span>
+                                <span>{key[0]}</span>
+                                <span>{detail[key[0]]}</span>
                             </div>
                         );
                     })}
@@ -58,17 +57,22 @@ const Product = (props) => {
                     <h3>{product_name}</h3>
                     <p>{product_description}</p>
                     <div>
-                        {owner.account.avatar && (
-                            <img
-                                src={owner.account.avatar.url}
-                                alt="avatar"
-                                className="avatar-m"
-                            />
-                        )}
-
+                        <img
+                            src={
+                                owner.account.avatar
+                                    ? owner.account.avatar.url
+                                    : avatar
+                            }
+                            alt="avatar"
+                            className="avatar-m"
+                        />
                         <span>{owner.account.username}</span>
                     </div>
                 </div>
+                <hr />
+                <Link to={`/payment/${id}`}>
+                    <button>Acheter</button>
+                </Link>
             </div>
         </div>
     );

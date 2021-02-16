@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Signup from "../containers/Signup";
-import Login from "../containers/Login";
+import Signup from "../components/Signup";
+import Login from "../components/Login";
 
-const Modal = ({ modalVisibility, setCookie, setUser }) => {
+const Modal = ({ modalVisibility, setCookie }) => {
     const [signup, setSignup] = useState(true);
     const switchSignupOrLogin = () => {
         setSignup(!signup);
@@ -16,7 +16,6 @@ const Modal = ({ modalVisibility, setCookie, setUser }) => {
                         <>
                             <Login
                                 setCookie={setCookie}
-                                setUser={setUser}
                                 modalVisibility={modalVisibility}
                             />
                             <div>
@@ -30,7 +29,6 @@ const Modal = ({ modalVisibility, setCookie, setUser }) => {
                         <>
                             <Signup
                                 setCookie={setCookie}
-                                setUser={setUser}
                                 modalVisibility={modalVisibility}
                             />
                             <div>

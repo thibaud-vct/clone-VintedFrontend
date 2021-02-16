@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-const Signup = ({ setCookie, modalVisibility, setUser }) => {
+const Signup = ({ setCookie, modalVisibility }) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -29,8 +29,7 @@ const Signup = ({ setCookie, modalVisibility, setUser }) => {
                             password: password,
                         }
                     );
-                    setCookie(response.data.token);
-                    setUser(response.data.account);
+                    setCookie(response.data.token, response.data.account);
                 } catch (error) {
                     // créer page 404
                     alert(error.message);

@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import noImage from "../assets/img/no-image.jpg";
+import avatar from "../assets/img/avatar.jpg";
 
 const Publish = ({ user }) => {
     const token = Cookies.get("loginToken");
@@ -14,11 +15,11 @@ const Publish = ({ user }) => {
     const [brand, setBrand] = useState("");
     const [size, setSize] = useState("");
     const [color, setColor] = useState("");
-    const [files, setFiles] = useState({});
+    const [files, setFiles] = useState();
     const [newData, setNewData] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmitNewOffer = (e) => {
+    const handleSubmitNewOffer = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("title", title);
@@ -31,50 +32,53 @@ const Publish = ({ user }) => {
         formData.append("color", color);
         formData.append("picture", files);
 
-        const fetchData = async () => {
-            try {
-                const response = await axios.post(
-                    "https://my-first-api-vinted.herokuapp.com/offer/publish",
-                    formData,
-                    {
-                        headers: {
-                            authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
-                setNewData(response.data);
-                setIsLoading(true);
-            } catch (error) {
-                // créer route 404
-                alert(error.message);
-            }
-        };
-        fetchData();
+        try {
+            const response = await axios.post(
+                "https://my-first-api-vinted.herokuapp.com/offer/publish",
+                formData,
+                {
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            setNewData(response.data);
+            setIsLoading(true);
+        } catch (error) {
+            // créer route 404
+            alert(error.message);
+        }
     };
 
     return isLoading ? (
         <Redirect to={`/offer/${newData.newOffer._id}`} />
     ) : (
-        <form className="product" onSubmit={handleSubmitNewOffer}>
-            <div>
-                <img src={noImage} alt="array grey" />
+        <>
+            <div className="userPublish">
+                <img
+                    src={user.avatar ? user.avatar.url : avatar}
+                    alt="avatar"
+                    className="avatar-m"
+                />
+                <span>{user.username}</span>
+            </div>
+            <form className="newOffer" onSubmit={handleSubmitNewOffer}>
+                <label htmlFor="uploadFile">
+                    <img
+                        src={files ? URL.createObjectURL(files) : noImage}
+                        alt="array grey"
+                    />
+                    <span>
+                        {files ? "Modifier l'image" : "Télécharger une image"}
+                    </span>
+                </label>
                 <input
+                    accept="image/*"
+                    id="uploadFile"
+                    style={{ display: "none" }}
                     type="file"
                     onChange={(e) => setFiles(e.target.files[0])}
                 />
-            </div>
-            <div>
-                <div>
-                    {user.avatar && (
-                        <img
-                            src={user.avatar.url}
-                            alt="avatar"
-                            className="avatar-m"
-                        />
-                    )}
-
-                    <span>{user.username}</span>
-                </div>
 
                 <div>
                     <div>
@@ -122,28 +126,33 @@ const Publish = ({ user }) => {
                             />
                         </span>
                     </div>
+                    <div>
+                        <span>Nom : </span>
+                        <input
+                            type="text"
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <span>Descrition : </span>
+                        <input
+                            type="text"
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <span>Prix : </span>
+                        <input
+                            type="text"
+                            onChange={(e) => setPrice(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <button type="submit">Publier</button>
+                    </div>
                 </div>
-                <hr />
-                <div>
-                    <h3>Nom : </h3>
-                    <input
-                        type="text"
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
-                    <p>Descrition : </p>
-                    <input
-                        type="text"
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                    <p>Prix : </p>
-                    <input
-                        type="text"
-                        onChange={(e) => setPrice(e.target.value)}
-                    />
-                    <button onSubmit="">Publier</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </>
     );
 };
 export default Publish;
