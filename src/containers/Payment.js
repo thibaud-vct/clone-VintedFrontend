@@ -27,7 +27,7 @@ const Payment = () => {
             formData.append("user_id", data.owner._id);
 
             const response = await axios.post(
-                "http://localhost:3100/offer/payment/",
+                "https://my-first-api-vinted.herokuapp.com/offer/payment/",
                 formData
             );
             if (response.status === 200) {
