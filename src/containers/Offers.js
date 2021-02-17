@@ -5,7 +5,6 @@ import Offer from "../components/Offer";
 const Offers = ({ filters }) => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const params = { title: filters, sort: "price-desc" };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -17,10 +16,9 @@ const Offers = ({ filters }) => {
             //     params = params + "param2=tata";
             // }
             try {
-                const response = await axios
-                    .get
-                    // `https://my-first-api-vinted.herokuapp.com/offers?title=${filters}`
-                    ();
+                const response = await axios.get(
+                    `https://my-first-api-vinted.herokuapp.com/offers?title=${filters}`
+                );
                 setData(response.data);
                 setIsLoading(true);
             } catch (error) {
@@ -30,14 +28,12 @@ const Offers = ({ filters }) => {
         fetchData();
     }, [filters]);
 
-    console.log("filters =>", params);
-
     return !isLoading ? (
         <p className="isLoading" />
     ) : (
         <div>
             <section className="filters">
-                <div></div>
+                <div>Filtre à refaire</div>
             </section>
             <section className="offers">
                 {data.offers.map((offer) => {

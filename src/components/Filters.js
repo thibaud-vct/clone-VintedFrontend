@@ -4,11 +4,11 @@ import { useHistory } from "react-router-dom";
 const Filters = ({ setFilters }) => {
     const [search, setSearch] = useState();
     const history = useHistory();
-    // setFilters(search);
+    setFilters(search);
     const handleSearch = (e) => {
         e.preventDefault();
         setFilters(search);
-        history.push(`/offers/${search}`);
+        history.push(`/offers/`);
     };
     return (
         <>

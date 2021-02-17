@@ -48,7 +48,9 @@ const Header = ({
                             </button>
                         </>
                     )}
-                    <button>Vends tes articles</button>
+                    <Link to="/publish">
+                        <button>Vends tes articles</button>
+                    </Link>
                 </div>
             </header>
         </>

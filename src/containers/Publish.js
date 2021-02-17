@@ -53,7 +53,7 @@ const Publish = ({ user }) => {
     return isLoading ? (
         <Redirect to={`/offer/${newData.newOffer._id}`} />
     ) : (
-        <>
+        <div className="publish">
             <div className="userPublish">
                 <img
                     src={user.avatar ? user.avatar.url : avatar}
@@ -63,69 +63,27 @@ const Publish = ({ user }) => {
                 <span>{user.username}</span>
             </div>
             <form className="newOffer" onSubmit={handleSubmitNewOffer}>
-                <label htmlFor="uploadFile">
-                    <img
-                        src={files ? URL.createObjectURL(files) : noImage}
-                        alt="array grey"
-                    />
-                    <span>
-                        {files ? "Modifier l'image" : "Télécharger une image"}
-                    </span>
-                </label>
-                <input
-                    accept="image/*"
-                    id="uploadFile"
-                    style={{ display: "none" }}
-                    type="file"
-                    onChange={(e) => setFiles(e.target.files[0])}
-                />
-
                 <div>
-                    <div>
-                        <span>MARQUE</span>
+                    <label htmlFor="uploadFile">
+                        <img
+                            src={files ? URL.createObjectURL(files) : noImage}
+                            alt="array grey"
+                        />
                         <span>
-                            <input
-                                type="text"
-                                onChange={(e) => setBrand(e.target.value)}
-                            />
+                            {files
+                                ? "Modifier l'image"
+                                : "Télécharger une image"}
                         </span>
-                    </div>
-                    <div>
-                        <span>TAILLE</span>
-                        <span>
-                            <input
-                                type="text"
-                                onChange={(e) => setSize(e.target.value)}
-                            />
-                        </span>
-                    </div>
-                    <div>
-                        <span>ÉTAT</span>
-                        <span>
-                            <input
-                                type="text"
-                                onChange={(e) => setCondition(e.target.value)}
-                            />
-                        </span>
-                    </div>
-                    <div>
-                        <span>COULEUR</span>
-                        <span>
-                            <input
-                                type="text"
-                                onChange={(e) => setColor(e.target.value)}
-                            />
-                        </span>
-                    </div>
-                    <div>
-                        <span>EMPLACEMENT</span>
-                        <span>
-                            <input
-                                type="text"
-                                onChange={(e) => setCity(e.target.value)}
-                            />
-                        </span>
-                    </div>
+                    </label>
+                    <input
+                        accept="image/*"
+                        id="uploadFile"
+                        style={{ display: "none" }}
+                        type="file"
+                        onChange={(e) => setFiles(e.target.files[0])}
+                    />
+                </div>
+                <div>
                     <div>
                         <span>Nom : </span>
                         <input
@@ -135,15 +93,51 @@ const Publish = ({ user }) => {
                     </div>
                     <div>
                         <span>Descrition : </span>
-                        <input
+                        <textarea
                             type="text"
                             onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <span>MARQUE</span>
+                        <input
+                            type="text"
+                            onChange={(e) => setBrand(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <span>TAILLE</span>
+                        <input
+                            type="text"
+                            onChange={(e) => setSize(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <span>ÉTAT</span>
+                        <input
+                            type="text"
+                            onChange={(e) => setCondition(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <span>COULEUR</span>
+                        <input
+                            type="text"
+                            onChange={(e) => setColor(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <span>EMPLACEMENT</span>
+                        <input
+                            type="text"
+                            onChange={(e) => setCity(e.target.value)}
                         />
                     </div>
                     <div>
                         <span>Prix : </span>
                         <input
                             type="text"
+                            placeholder="30,00 €"
                             onChange={(e) => setPrice(e.target.value)}
                         />
                     </div>
@@ -152,7 +146,7 @@ const Publish = ({ user }) => {
                     </div>
                 </div>
             </form>
-        </>
+        </div>
     );
 };
 export default Publish;

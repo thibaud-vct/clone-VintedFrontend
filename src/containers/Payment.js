@@ -57,22 +57,25 @@ const Payment = () => {
     return !isLoading ? (
         <p className="isLoading" />
     ) : (
-        <div>
+        <div className="payment">
             <div>
-                <span>{data.product_name}</span>
-                <span>
-                    {data.product_details.map((elem, i) => {
-                        const key = Object.keys(elem);
-                        return (
-                            key[0] === "TAILLE" && (
-                                <div key={i}>
-                                    <span>{elem[key]}</span>
-                                </div>
-                            )
-                        );
-                    })}
-                </span>
-                <span>{data.product_price}</span>
+                <div>
+                    <span>{data.product_name}</span>
+                    <span>taille : </span>
+                    <span>
+                        {data.product_details.map((elem, i) => {
+                            const key = Object.keys(elem);
+                            return (
+                                key[0] === "TAILLE" && (
+                                    <div key={i}>
+                                        <span>{elem[key]}</span>
+                                    </div>
+                                )
+                            );
+                        })}
+                    </span>
+                </div>
+                <span>{data.product_price}€</span>
             </div>
             {!succeeded ? (
                 <form onSubmit={handleSubmit}>

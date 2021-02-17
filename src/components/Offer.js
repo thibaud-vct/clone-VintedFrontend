@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import avatar from "../assets/img/avatar.jpg";
 
 const Offer = ({ offer }) => {
     // console.log("offer", offer);
@@ -14,13 +15,15 @@ const Offer = ({ offer }) => {
         <div className="offer">
             <Link to={`/offer/${_id}`}>
                 <div>
-                    {owner.account.avatar && (
-                        <img
-                            src={owner.account.avatar.url}
-                            alt="avatar"
-                            className="avatar"
-                        />
-                    )}
+                    <img
+                        src={
+                            owner.account.avatar
+                                ? owner.account.avatar.url
+                                : avatar
+                        }
+                        alt="avatar"
+                        className="avatar-m"
+                    />
                     <span>{owner.account.username}</span>
                 </div>
                 <img src={product_image.secure_url} alt="" />
