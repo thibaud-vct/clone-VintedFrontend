@@ -48,9 +48,15 @@ const Header = ({
                             </button>
                         </>
                     )}
-                    <Link to="/publish">
-                        <button>Vends tes articles</button>
-                    </Link>
+                    {Cookies.get("loginToken") ? (
+                        <Link to="/publish">
+                            <button>Vends tes articles</button>
+                        </Link>
+                    ) : (
+                        <button onClick={modalVisibility}>
+                            Vends tes articles
+                        </button>
+                    )}
                 </div>
             </header>
         </>
