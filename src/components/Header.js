@@ -2,6 +2,7 @@ import { Link, useHistory } from "react-router-dom";
 import logo from "../assets/img/logo.jpg";
 import Modal from "../components/Modal";
 import Filters from "../components/Filters";
+import Cookies from "js-cookie";
 
 const Header = ({
     token,
